@@ -1,4 +1,4 @@
-import { Component, useState } from "react";
+import { Component } from "react";
 
 import User from "./User";
 import classes from "./Users.module.css";
@@ -8,15 +8,21 @@ class Users extends Component {
     super();
     this.state = {
       showUsers: true,
-      more: 'Test'
+      more: "Test",
     };
+  }
+
+  componentDidUpdate() {
+    if (this.props.users.length === 0) {
+      throw new Error("No users found");
+    }
   }
 
   toggleUsersHandler() {
     this.setState((curState) => {
       return {
-        showUsers: !curState.showUsers
-      }; 
+        showUsers: !curState.showUsers,
+      };
     });
   }
 
